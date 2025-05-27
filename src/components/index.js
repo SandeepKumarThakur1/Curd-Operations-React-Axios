@@ -1,4 +1,4 @@
-import InputBox from "./InputBox";
+import Form from "./Form";
 import Posts from "./Posts";
 
-export {InputBox, Posts}
+export {Form, Posts}
