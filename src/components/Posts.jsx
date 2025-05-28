@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { deletePost, getPost } from "../services/PostApi";
 import { Button, Col, Row } from "react-bootstrap";
+import {Form} from "../components"
 
 const Posts = () => {
   const [data, setData] = useState([]);
   // console.log(getPost())
 
+  // Get Post Handle
   const getPostData = async () => {
     try {
       const res = await getPost();
@@ -17,18 +19,18 @@ const Posts = () => {
     }
   };
 
+  // Delete Post Handle
   const onhandleDelete = async (id) => {
     try {
       const res = await deletePost(id);
       console.log(res);
-      if(res.status === 200){
-        const newUpdatedPost = data.filter((curElem)=>{
+      if (res.status === 200) {
+        const newUpdatedPost = data.filter((curElem) => {
           return curElem.id !== id;
-        })
+        });
         setData(newUpdatedPost);
-      }
-      else{
-        console.log("Not Delete Post", res.status)
+      } else {
+        console.log("Not Delete Post", res.status);
       }
     } catch (error) {
       console.log(error);
@@ -41,6 +43,10 @@ const Posts = () => {
 
   return (
     <>
+    {/* Form Details */}
+      <Form data={data} setData={setData} />
+
+      {/* Post Details */}
       <ul className="list-unstyled">
         <Row className="gap-3 justify-content-center" md={4}>
           {data.map((curElem) => {
