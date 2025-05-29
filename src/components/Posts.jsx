@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { deletePost, getPost } from "../services/PostApi";
 import { Button, Col, Row } from "react-bootstrap";
-import {Form} from "../components"
+import { Form } from "../components";
 
 const Posts = () => {
   const [data, setData] = useState([]);
-  // console.log(getPost())
+  const [updatePostApi, setUpdatePostApi] = useState({});
 
   // Get Post Handle
   const getPostData = async () => {
@@ -37,14 +37,17 @@ const Posts = () => {
     }
   };
 
+  // Update Post Handle
+  const onhandleupdate = (curElem) => setUpdatePostApi(curElem);
+
   useEffect(() => {
     getPostData();
   }, []);
 
   return (
     <>
-    {/* Form Details */}
-      <Form data={data} setData={setData} />
+      {/* Form Details */}
+      <Form data={data} setData={setData} updatePostApi={updatePostApi} setUpdatePostApi={setUpdatePostApi} />
 
       {/* Post Details */}
       <ul className="list-unstyled">
@@ -70,6 +73,7 @@ const Posts = () => {
                       as="a"
                       variant="Success"
                       className="bg-success text-white"
+                      onClick={() => onhandleupdate(curElem)}
                     >
                       Edit
                     </Button>
