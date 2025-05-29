@@ -1,19 +1,43 @@
 import React, { useState } from "react";
+import { addPost } from "../services/PostApi";
 
-const InputBox = () => {
-    const [addData, setAddData] = useState({
-        title: '',
-        body: '',
-    })
+const InputBox = ({ data, setData }) => {
+  const [addData, setAddData] = useState({
+    title: "",
+    body: "",
+  });
 
-    const handleInputChange = (e) => {
-        // const name = e.target.title
-        // const value = e.target.value
+  const handleInputChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAddData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const addPostData = async () => {
+    const res = await addPost(addData);
+    console.log("res", res);
+
+    if(res.status === 201){
+      setData([...data, res.data]);
+      setAddData({title:"", body:""})
     }
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    addPostData();
+  };
   return (
     <>
       <form
         className="d-flex align-items-center gap-2 w-100 justify-content-center pb-4"
+        onSubmit={handleFormSubmit}
       >
         <div>
           <input
