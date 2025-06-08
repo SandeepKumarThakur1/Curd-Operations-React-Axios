@@ -68,3 +68,6 @@ useEffect(() => {
   fetchPosts();
 }, []);
 ```
+### Live Project
+URL :- [curdreactapi](https://curdreactapi.netlify.app
+)
