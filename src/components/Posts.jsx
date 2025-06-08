@@ -47,7 +47,12 @@ const Posts = () => {
   return (
     <>
       {/* Form Details */}
-      <Form data={data} setData={setData} updatePostApi={updatePostApi} setUpdatePostApi={setUpdatePostApi} />
+      <Form
+        data={data}
+        setData={setData}
+        updatePostApi={updatePostApi}
+        setUpdatePostApi={setUpdatePostApi}
+      />
 
       {/* Post Details */}
       <ul className="list-unstyled">
